@@ -6,13 +6,13 @@ import Nav from "./Nav";
 
 export default function ChatRoom() {
   
-  return <div className="">
+  return <>
       <Nav/>
       <Aside/>
       <main className=" bg-white ml-22 pt-13 ">
         <Outlet/>
       </main>
-  </div>
+  </>
  
  
 }
