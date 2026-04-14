@@ -6,7 +6,7 @@ export default function RouterPaths() {
   return (
     <Routes>
       <Route path="/" element={<LoginForm />} />
-      <Route path="/chat-room" element={<ChatForm/>} />
+      <Route path="/chat-room" element={<ChatForm />} />
     </Routes>
   );
 }
