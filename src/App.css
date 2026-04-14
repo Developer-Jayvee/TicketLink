@@ -4,3 +4,26 @@ body{
     width: 100%;
     height: 100vh;
 }
+
+li > a.active{
+    background-color: rgba(59, 130, 246, 0.05); 
+    color:rgba(0, 0, 255, 0.648);
+}
+li > a:hover{
+    transition: all 200ms ease-in-out;
+    background-color: rgba(59, 130, 246, 0.05); 
+}
+li > a.active::before ,
+li > a:hover::before
+{
+    content:"";
+    position: absolute;
+    left:0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    border-top-right-radius: var(--radius-md); /* 0.375rem (6px) */
+    border-bottom-right-radius: var(--radius-md); /* 0.375rem (6px) */
+    background-color: blue;
+}
+
