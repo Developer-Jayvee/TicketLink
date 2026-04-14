@@ -1,9 +1,3 @@
-
-
 export default function LoginForm() {
-  return (
-     <div>
-        
-     </div>
-  );
+  return <div></div>;
 }
