@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 interface ExtendedInput extends InputInterface {
   customClass?: string;
-  labelName: string;
+  labelName ?: string;
 }
 
 function InputConfig({
@@ -45,7 +45,7 @@ export default function Input({
     <div
       className={` ${customClass} grid grid-cols-1 gap-2 my-2 sm:grid-cols-[90px_1fr]  `}
     >
-      <label className="font-medium text-lg text-center md:text-left">
+      <label className={`font-medium text-lg text-center md:text-left ${labelName ?? 'hidden'}`}>
         {labelName}{" "}
       </label>
 
