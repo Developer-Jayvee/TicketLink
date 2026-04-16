@@ -16,3 +16,9 @@ export interface AuthFormInterface {
     onSubmitForm ?: (e : FormEvent<HTMLFormElement>) => void;
     isSubmitDisabled: boolean;
 }
+
+export interface ModalContextInterface{
+    isModalOpen : boolean;
+    openModal:() => void;
+    closeModal:() => void;
+}

@@ -1,11 +1,10 @@
 import { Home, LogOut } from "iconoir-react";
-import { useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 export default function Aside() {
   const location = useLocation();
   return (
-    <aside className="bg-blue-50 flex flex-col items-center fixed top-13 left-0 bottom-0 overflow-hidden transition-all translate-x-[-80px] md:translate-x-0 w-20 border-0 shadow-r py-1 pt-7">
+    <aside className="bg-white shadow-lg flex flex-col items-center fixed top-13 left-0 bottom-0 overflow-hidden transition-all translate-x-[-80px] md:translate-x-0 w-20 border-0 shadow-r py-1 pt-7">
       <ul className="flex flex-col w-full items-center grow">
         <li className=" w-full ">
           <NavLink
