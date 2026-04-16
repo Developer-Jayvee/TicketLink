@@ -1,4 +1,8 @@
-export default function UserBubble() {
+import type { MessageBubbleInterface } from "../../../../types/componentTypes";
+
+export default function UserBubble({
+  message
+}: MessageBubbleInterface) {
   return (
     <div className="relative" id="other-user">
       <p className="mr-16 my-2 font-mono text-right text-gray-500">Jayvee</p>
@@ -9,11 +13,8 @@ export default function UserBubble() {
           alt="Profile Image"
         />
       </div>
-      <div className="mr-15 ml-40  bg-blue-100 py-1 border-0 shadow-lg px-5 rounded-2xl ">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque,
-        laborum dolores? Nobis, eveniet! Rem minima at quidem culpa tempora vero
-        quasi, nostrum, corporis dicta iste voluptatem eveniet suscipit cumque.
-        Aliquid! lorem
+      <div className="flex justify-end">
+        <p className="mr-15 bg-blue-100 py-1 border-0  shadow-lg px-5 rounded-2xl inline-block ">{message}</p>
       </div>
     </div>
   );

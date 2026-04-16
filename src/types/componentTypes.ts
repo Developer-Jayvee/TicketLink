@@ -22,3 +22,17 @@ export interface ModalContextInterface{
     openModal:() => void;
     closeModal:() => void;
 }
+export type MessageList = {
+    message: string;
+    user : string;
+}
+export interface SocketContextInterface {
+    joinRoom : (roomID : string) => void;
+    sendMessage : (message : string,from : string) => void;
+    messages: MessageList[];
+}
+export interface MessageBubbleInterface {
+    isReplyMessage ?: boolean;
+    message ?: string;
+    user ?: string;
+}

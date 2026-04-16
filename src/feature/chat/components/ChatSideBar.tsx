@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { ModalContext } from "./Chats";
 
 export default function ChatSideBar() {
-    const { openModal} = useContext(ModalContext)
+  const { openModal} = useContext(ModalContext)
 
   return (
     <aside className=" flex flex-col  gap-5 h-full p-4 bg-blue-50">
