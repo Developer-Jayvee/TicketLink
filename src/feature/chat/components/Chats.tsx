@@ -11,10 +11,11 @@ export const ModalContext = createContext<ModalContextInterface>(ModalContextIni
 export const SocketContext = createContext<SocketContextInterface>(SocketContextInitState);
 export default function Chats() {
     const {
-        socketRef,
         joinRoom,
         sendMessage,
-        messageList
+        messageList,
+        setMessageList,
+        tempID // for testing
     } = useSocketHook()
     // const [messages,setMessages] = useState<MessageList[]>([])
     const [isModalOpen , setModalOpen] = useState(false);
@@ -28,7 +29,9 @@ export default function Chats() {
     const socketValue = useMemo( () =>({
         joinRoom : (roomID: string) => joinRoom(roomID),
         sendMessage : (message : string, from : string) => sendMessage(message,from),
-        messages: messageList
+        messages: messageList,
+        setMessageList,
+        tempID
     }),[messageList])
 
   

@@ -1,17 +1,21 @@
 import { Attachment, Send } from "iconoir-react";
 import MessageBubble from "./MessageBubble";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { SocketContext } from "./Chats";
 
 export default function ChatContent() {
-  const { sendMessage, messages } = useContext(SocketContext);
+  const { sendMessage, messages , tempID } = useContext(SocketContext);
   const [messageContext, setMessageContext] = useState("");
+  
+  const chatRef = useRef(null)
 
   const handleSendMessage = () => {
     if(messageContext.trim() === "") return;
 
-    sendMessage(messageContext, 'TESTUsewr');
+    sendMessage(messageContext, tempID);
     setMessageContext("")
+   
+   
   }
   const handleKeyDown = (e) => {
     if(e.key === 'Enter' && !e.shiftKey){
@@ -27,12 +31,12 @@ export default function ChatContent() {
   }, [messages]);
 
   return (
-    <div className=" h-full grid grid-rows-[60px_1fr_80px] w-full">
+    <div ref={chatRef} className=" h-full grid grid-rows-[60px_1fr_80px] w-full">
       <div className="chat-header flex items-center px-4 border-0 border-b border-gray-300 shadow-sm ">
         <span className="font-mono font-semibold text-lg">#Group 1</span>
       </div>
       <div className="chat-body flex flex-col-reverse px-4 py-6  min-h-0 overflow-y-auto ">
-        <div className="flex flex-col">
+        <div className="flex flex-col" id="chat-list">
           {messages.length === 0 ? (
             <div className="text-center text-gray-500 py-8">
               No messages yet. Start the conversation!
@@ -41,7 +45,7 @@ export default function ChatContent() {
             messages.map((val, index) => (
               <MessageBubble
                 key={index}
-                isReplyMessage={true}
+                isReplyMessage={tempID !== val.user}
                 message={val.message}
               />
             ))

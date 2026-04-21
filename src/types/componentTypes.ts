@@ -1,4 +1,4 @@
-import type { FormEvent, ReactNode } from "react";
+import type { Dispatch, FormEvent, ReactNode, SetStateAction } from "react";
 
 
 export type InputTypes = "text" | "password";
@@ -30,6 +30,8 @@ export interface SocketContextInterface {
     joinRoom : (roomID : string) => void;
     sendMessage : (message : string,from : string) => void;
     messages: MessageList[];
+    setMessageList: Dispatch<SetStateAction<MessageList[]>>;
+    tempID: number;
 }
 export interface MessageBubbleInterface {
     isReplyMessage ?: boolean;
