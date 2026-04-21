@@ -9,5 +9,7 @@ export const ModalContextInitState: ModalContextInterface = {
 export const SocketContextInitState: SocketContextInterface = {
   joinRoom: () => false,
   sendMessage: () => false,
-  messages: []
+  messages: [],
+  setMessageList: () => [],
+  tempID : 0
 }
