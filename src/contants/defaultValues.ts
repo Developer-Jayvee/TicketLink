@@ -1,0 +1,5 @@
+
+
+export const CONST_USER = "USER-INFO";
+export const CONST_ACCESS_TOKEN = "ACCESS-TOKEN";
+export const CONST_REFRESH_TOKEN = "REFRESH-TOKEN";
