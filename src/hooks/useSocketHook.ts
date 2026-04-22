@@ -1,14 +1,16 @@
-import { useEffect, useId, useRef, useState } from "react";
+import { useContext, useEffect, useId, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import type { MessageList } from "../types/componentTypes";
+import { UserInfoContext } from "../feature/chat/components/ChatRoom";
 
 export default function useSocketHook() {
+  const userInfo = useContext(UserInfoContext);
   const socketRef = useRef(null);
   const [messageList, setMessageList] = useState<MessageList[]>(
     [],
   );
   const [isConnected, setConnected] = useState<boolean>(false);
-  const tempID = Math.random() + 50;
+
   useEffect(() => {
     socketRef.current = io(import.meta.env.VITE_BACKEND_SERVER, {
       transports: ["websocket", "polling"],
@@ -34,13 +36,13 @@ export default function useSocketHook() {
     };
   }, []);
 
-  const sendMessage = (message , from) => {
+  const sendMessage = (message) => {
       socketRef.current.emit("send-message",{
         message : message,
-        user : tempID
+        user : userInfo
       })
 
-      setMessageList( (prev) => [...prev,{message : message , user: from}]);
+      setMessageList( (prev) => [...prev,{message : message , user: userInfo}]);
   }
   const joinRoom = (roomID) => {
     console.log(`Joined  ${roomID}`);
@@ -55,6 +57,5 @@ export default function useSocketHook() {
     isConnected,
     sendMessage,
     joinRoom,
-    tempID // for testing
   };
 }

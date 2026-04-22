@@ -1,4 +1,5 @@
 import type { Dispatch, FormEvent, ReactNode, SetStateAction } from "react";
+import type { UserInterface } from "./responseTypes";
 
 
 export type InputTypes = "text" | "password";
@@ -24,17 +25,21 @@ export interface ModalContextInterface{
 }
 export type MessageList = {
     message: string;
-    user : string;
+    user : UserInterface;
 }
 export interface SocketContextInterface {
     joinRoom : (roomID : string) => void;
-    sendMessage : (message : string,from : string) => void;
+    sendMessage : (message : string) => void;
     messages: MessageList[];
     setMessageList: Dispatch<SetStateAction<MessageList[]>>;
-    tempID: number;
+    userInfo: UserInterface
 }
 export interface MessageBubbleInterface {
     isReplyMessage ?: boolean;
     message ?: string;
-    user ?: string;
+    userInfo ?: UserInterface;
+}
+
+export interface FeedbackInterface extends MessageBubbleInterface {
+  replyUserInfo : UserInterface;
 }
