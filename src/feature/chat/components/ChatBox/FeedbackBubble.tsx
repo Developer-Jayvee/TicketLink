@@ -1,14 +1,17 @@
-import type { MessageBubbleInterface } from "../../../../types/componentTypes";
+import type { FeedbackInterface } from "../../../../types/componentTypes";
+import { setParamsData, ucFirst } from "../../../../shared/utils/utilities";
+
 
 export default function FeedbackBubble({
-  message
-} : MessageBubbleInterface) {
+  message, replyUserInfo
+} : FeedbackInterface) {
+  
   return (
     <div className="relative" id="other-user">
-      <p className="ml-16 my-2 font-mono text-gray-500">Jayvee</p>
+      <p className="ml-16 my-2 font-mono text-gray-500">{ucFirst(replyUserInfo.first_name)}</p>
       <div className="absolute rounded-full overflow-hidden w-10 h-10 ">
         <img
-          src="https://ui-avatars.com/api/?name=Jayvee+Hidlao"
+          src={`https://ui-avatars.com/api/?name=${setParamsData(`${replyUserInfo.first_name} ${replyUserInfo.last_name}`)}`}
           className="w-full h-full object-cover"
           alt="Profile Image"
         />

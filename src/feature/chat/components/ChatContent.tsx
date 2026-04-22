@@ -4,7 +4,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { SocketContext } from "./Chats";
 
 export default function ChatContent() {
-  const { sendMessage, messages , tempID } = useContext(SocketContext);
+  const { sendMessage, messages , userInfo } = useContext(SocketContext);
   const [messageContext, setMessageContext] = useState("");
   
   const chatRef = useRef(null)
@@ -12,7 +12,7 @@ export default function ChatContent() {
   const handleSendMessage = () => {
     if(messageContext.trim() === "") return;
 
-    sendMessage(messageContext, tempID);
+    sendMessage(messageContext);
     setMessageContext("")
    
    
@@ -45,7 +45,8 @@ export default function ChatContent() {
             messages.map((val, index) => (
               <MessageBubble
                 key={index}
-                isReplyMessage={tempID !== val.user}
+                replyUserInfo={val.user}
+                isReplyMessage={userInfo.username !== val.user.username}
                 message={val.message}
               />
             ))

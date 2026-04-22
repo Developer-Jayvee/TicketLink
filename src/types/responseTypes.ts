@@ -5,6 +5,15 @@ export interface UserInterface {
     last_name : string;
     age : number;
     role:RoleTypes;
+    email : string;
+    username: string;
+}
+export interface UserLoginInterface {
+    id ?: string;
+    first_name : string;
+    last_name : string;
+    age : number;
+    role:RoleTypes;
     password : string;
     email : string;
     username: string;
