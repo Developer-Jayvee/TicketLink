@@ -5,6 +5,7 @@ import { SocketContext } from "../Chats";
 
 export default function GroupChats(){
   const { joinRoom , tempID } = useContext(SocketContext);
+
   return <div className="groups">
             <label className="font-bold text-lg text-gray-500">GROUPS</label>
             <ul className="ml-4 mt-2">

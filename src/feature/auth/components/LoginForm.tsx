@@ -10,7 +10,7 @@ interface LoginFormInterface {
   password: string;
 }
 export default function LoginForm() {
-  const loginMutation = useMutationHook<LoginFormInterface>({ endpoint: '/login', type: "POST", contentType: { 'Content-Type': 'application/json' } });
+  const loginMutation = useMutationHook<LoginFormInterface>({ endpoint: '/login', path:import.meta.env.VITE_AUTH_SERVER, type: "POST" });
   const navigate = useNavigate();
   const [canSubmit, setCanSubmit] = useState(false);
   const [formData, setFormData] = useState<LoginFormInterface>({

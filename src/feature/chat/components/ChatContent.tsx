@@ -3,7 +3,12 @@ import MessageBubble from "./MessageBubble";
 import { useContext, useEffect, useRef, useState } from "react";
 import { SocketContext } from "./Chats";
 
-export default function ChatContent() {
+interface ChatContentInterface {
+  isChatOpen ?: boolean;
+}
+export default function ChatContent({
+  isChatOpen = false
+} : ChatContentInterface) {
   const { sendMessage, messages , userInfo } = useContext(SocketContext);
   const [messageContext, setMessageContext] = useState("");
   
@@ -30,6 +35,8 @@ export default function ChatContent() {
     }
   }, [messages]);
 
+
+  if(!isChatOpen) return null;
   return (
     <div ref={chatRef} className=" h-full grid grid-rows-[60px_1fr_80px] w-full">
       <div className="chat-header flex items-center px-4 border-0 border-b border-gray-300 shadow-sm ">
