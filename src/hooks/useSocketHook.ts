@@ -1,7 +1,8 @@
-import { useContext, useEffect, useId, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import type { MessageList } from "../types/componentTypes";
 import { UserInfoContext } from "../feature/chat/components/ChatRoom";
+import { CONST_ACCESS_TOKEN } from "../contants/defaultValues";
 
 export default function useSocketHook() {
   const userInfo = useContext(UserInfoContext);
@@ -9,12 +10,17 @@ export default function useSocketHook() {
   const [messageList, setMessageList] = useState<MessageList[]>(
     [],
   );
+  const [hasJoinRoom , setHasJoinRoom] = useState<boolean>(false);
   const [isConnected, setConnected] = useState<boolean>(false);
 
+ 
   useEffect(() => {
     socketRef.current = io(import.meta.env.VITE_BACKEND_SERVER, {
       transports: ["websocket", "polling"],
-      withCredentials: false,
+      withCredentials: true,
+      auth:{
+        token: localStorage.getItem(CONST_ACCESS_TOKEN)
+      }
     });
     socketRef.current.on("connect", () => {
       console.log("Connected to server");
@@ -46,7 +52,7 @@ export default function useSocketHook() {
   }
   const joinRoom = (roomID) => {
     console.log(`Joined  ${roomID}`);
-    
+    setHasJoinRoom(roomID);
     socketRef.current.emit("join-channel",roomID);
   }
 
@@ -57,5 +63,6 @@ export default function useSocketHook() {
     isConnected,
     sendMessage,
     joinRoom,
+    hasJoinRoom
   };
 }

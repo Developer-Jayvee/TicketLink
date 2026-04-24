@@ -1,6 +1,5 @@
 import { CONST_ACCESS_TOKEN, CONST_REFRESH_TOKEN, CONST_USER } from "../../../contants/defaultValues";
-import type { LoginResponseInterface, UserInterface, UserLoginInterface } from "../../../types/responseTypes"
-
+import type { LoginResponseInterface, UserLoginInterface } from "../../../types/responseTypes"
 
 export const AuthService = {
     login : ({ user , access , refresh} : LoginResponseInterface) => {
@@ -14,4 +13,6 @@ export const AuthService = {
     },
     isAuthenticated : () : boolean => !!localStorage.getItem(CONST_ACCESS_TOKEN) && !!localStorage.getItem(CONST_REFRESH_TOKEN),
     getUserInfo : (): UserLoginInterface => JSON.parse(localStorage.getItem(CONST_USER)), 
+    verifyIfExpired : () => {
+    }
 }

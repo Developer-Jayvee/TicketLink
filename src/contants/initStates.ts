@@ -6,6 +6,8 @@ import type { UserInterface } from "../types/responseTypes";
 
 export const ModalContextInitState: ModalContextInterface = {
   isModalOpen: false,
+  setGroupChatForm :() => { name: "" },
+  formData : { name : ""},
   openModal: () => true,
   closeModal: () => false,
 };

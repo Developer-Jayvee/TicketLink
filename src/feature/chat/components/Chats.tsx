@@ -2,27 +2,36 @@ import ChatSideBar from "./ChatSideBar";
 import ChatContent from "./ChatContent";
 import Modal from "../../../shared/components/Modal";
 import { createContext, useContext, useMemo, useState } from "react";
-import type {  ModalContextInterface, SocketContextInterface } from "../../../types/componentTypes";
+import type {  GroupChatInterface, ModalContextInterface,  SocketContextInterface } from "../../../types/componentTypes";
 import { ModalContextInitState, SocketContextInitState } from "../../../contants/initStates";
 import useSocketHook from "../../../hooks/useSocketHook";
 import { UserInfoContext } from "./ChatRoom";
+import CreateGroupChat from "./ChatSideBar/CreateGroupChat";
+import RequestHandler from "../../../shared/utils/requestHandlers";
+import type { PayloadGroupChat } from "../../../types/payloadTypes";
+import useInputHook from "../../../hooks/useInputHook";
+import type { GroupChatResponseInterface } from "../../../types/responseTypes";
 
-
-export const ModalContext = createContext<ModalContextInterface>(ModalContextInitState);
+export const ModalContext = createContext<ModalContextInterface<GroupChatInterface>>(ModalContextInitState);
 export const SocketContext = createContext<SocketContextInterface>(SocketContextInitState);
 export default function Chats() {
     const userInfo = useContext(UserInfoContext);
+    const { handleInputChange , formData } = useInputHook<GroupChatInterface>({ name : ""});
+    const {
+        postRequest
+    } = RequestHandler()
     const {
         joinRoom,
         sendMessage,
         messageList,
         setMessageList,
+        hasJoinRoom
     } = useSocketHook()
-    // const [messages,setMessages] = useState<MessageList[]>([])
     const [isModalOpen , setModalOpen] = useState(false);
-    
     const modalValue = useMemo( () => ({
         isModalOpen,
+        handleInputChange,
+        formData,
         openModal: () => setModalOpen(true),
         closeModal: () => setModalOpen(false)
     }),[isModalOpen])
@@ -35,6 +44,9 @@ export default function Chats() {
         userInfo
     }),[messageList])
 
+    const createGroupChat = async () => {
+        const response = await postRequest<PayloadGroupChat,GroupChatResponseInterface>({ endpoint : '/save-group', payload : formData })
+    }   
   
     
   return (
@@ -42,8 +54,10 @@ export default function Chats() {
         <ModalContext.Provider value={modalValue}>
             <SocketContext.Provider value={socketValue}>
                 <ChatSideBar />
-                <ChatContent />
-                <Modal isOpen={isModalOpen} closeModal={modalValue.closeModal}/>
+                <ChatContent isChatOpen={hasJoinRoom} />
+                <Modal onsubmit={createGroupChat} isOpen={isModalOpen} closeModal={modalValue.closeModal}>
+                    <CreateGroupChat/>
+                </Modal>
             </SocketContext.Provider>
         </ModalContext.Provider>
     </div>

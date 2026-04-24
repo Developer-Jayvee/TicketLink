@@ -18,8 +18,11 @@ export interface AuthFormInterface {
     isSubmitDisabled: boolean;
 }
 
-export interface ModalContextInterface{
+export type HandleInputChangeType<T> = (key : keyof T , value : string | number);
+export interface ModalContextInterface<T>{
     isModalOpen : boolean;
+    handleInputChange:HandleInputChangeType<T>
+    formData : GroupChatInterface;
     openModal:() => void;
     closeModal:() => void;
 }
@@ -42,4 +45,7 @@ export interface MessageBubbleInterface {
 
 export interface FeedbackInterface extends MessageBubbleInterface {
   replyUserInfo : UserInterface;
+}
+export interface GroupChatInterface {
+    name: string;
 }

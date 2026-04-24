@@ -23,3 +23,9 @@ export interface LoginResponseInterface {
     access: string;
     refresh: string;
 }
+
+export interface GroupChatResponseInterface {
+    id ?: number;
+    title : string;
+    description ?: string;
+}
