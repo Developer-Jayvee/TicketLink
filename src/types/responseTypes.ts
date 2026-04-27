@@ -25,7 +25,7 @@ export interface LoginResponseInterface {
 }
 
 export interface GroupChatResponseInterface {
-    id ?: number;
-    title : string;
+    id ?: string;
+    name : string;
     description ?: string;
 }

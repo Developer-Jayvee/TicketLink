@@ -28,10 +28,10 @@ export default function RequestHandler(){
         .catch( error => alert(`Error found in ${error}`));
     }
 
-    const getAllRequest = async ({ endpoint} : RequestConfigInterface) => {
-        return await axiosClient.get(endpoint)
-        .then( response => response)
-        .catch( error => alert(`Error found in ${error}`));
+    const getAllRequest = async <R>({ endpoint} : RequestConfigInterface) : Promise<R> => {
+        return await axiosClient.get<R>(endpoint)
+        .then( response  => response.data)
+        .catch( error => error);
     }
 
     const deleteRequest = async ({ endpoint , paramID} : DeleteRequestInterface) => {

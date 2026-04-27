@@ -1,5 +1,5 @@
 import type { Dispatch, FormEvent, ReactNode, SetStateAction } from "react";
-import type { UserInterface } from "./responseTypes";
+import type { GroupChatResponseInterface, UserInterface } from "./responseTypes";
 
 
 export type InputTypes = "text" | "password";
@@ -18,7 +18,7 @@ export interface AuthFormInterface {
     isSubmitDisabled: boolean;
 }
 
-export type HandleInputChangeType<T> = (key : keyof T , value : string | number);
+export type HandleInputChangeType< T> = (key : keyof T , value : T[keyof T]) => void;
 export interface ModalContextInterface<T>{
     isModalOpen : boolean;
     handleInputChange:HandleInputChangeType<T>
@@ -31,7 +31,7 @@ export type MessageList = {
     user : UserInterface;
 }
 export interface SocketContextInterface {
-    joinRoom : (roomID : string) => void;
+    joinRoom : (data : GroupChatResponseInterface) => void;
     sendMessage : (message : string) => void;
     messages: MessageList[];
     setMessageList: Dispatch<SetStateAction<MessageList[]>>;
@@ -48,4 +48,8 @@ export interface FeedbackInterface extends MessageBubbleInterface {
 }
 export interface GroupChatInterface {
     name: string;
+}
+
+export interface ChatSideInterface {
+    groupList : GroupChatResponseInterface[];
 }
