@@ -2,9 +2,11 @@ import {  useState } from "react";
 
 
 export default function useInputHook<T>(initState : T){
-    const [formData , setFormData] = useState<T>(initState);
+    const [formData , setFormData] = useState<T>(() => initState);
 
-    const handleInputChange = (key: keyof T , value : string | number) => {
+    const handleInputChange = <T> (key: keyof T , value : T[keyof T]) => {
+        console.log(1);
+        
         setFormData(
             (prev) => ({
                 ...prev,
@@ -12,8 +14,13 @@ export default function useInputHook<T>(initState : T){
             })
         );
     }
+    const resetFormData = () => {
+        setFormData(initState);
+    }
     return {
         handleInputChange,
+        setFormData,
+        resetFormData,
         formData
     }
 }

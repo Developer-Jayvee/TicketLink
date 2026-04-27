@@ -1,12 +1,14 @@
 import type {
+  ChatSideInterface,
+  GroupChatInterface,
   ModalContextInterface,
   SocketContextInterface,
 } from "../types/componentTypes";
 import type { UserInterface } from "../types/responseTypes";
 
-export const ModalContextInitState: ModalContextInterface = {
+export const ModalContextInitState : ModalContextInterface<GroupChatInterface> = {
   isModalOpen: false,
-  setGroupChatForm :() => { name: "" },
+  handleInputChange: () => false,
   formData : { name : ""},
   openModal: () => true,
   closeModal: () => false,
@@ -27,4 +29,7 @@ export const SocketContextInitState: SocketContextInterface = {
   userInfo : UserInfoContextInitState,
 };
 
+export const ChatSideInitState : ChatSideInterface = {
+  groupList: []
+}
 
